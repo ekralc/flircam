@@ -1,0 +1,14 @@
+<Project Sdk="CitizenFX.Sdk.Client/0.1.5">
+    <PropertyGroup>
+      <SignAssembly>false</SignAssembly>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <OutputPath></OutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="../Shared/*.cs" />
+    </ItemGroup>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="cd ..\&#xD;&#xA;postbuild.cmd" />
+    </Target>
+</Project>
