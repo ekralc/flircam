@@ -1,0 +1,14 @@
+{
+    "extends": [
+        "airbnb-base",
+        "plugin:vue/recommended"
+    ],
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "rules": {
+        "no-console": 0,
+        "linebreak-style": ["warn", "windows"]
+    }
+}

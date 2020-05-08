@@ -1,0 +1,29 @@
+{
+  "name": "flircam",
+  "version": "1.0.0",
+  "description": "FLIR camera for helicopters in FiveM",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint UI/**/*.{js,vue}",
+    "build": "webpack",
+    "watch": "webpack --mode=development --watch"
+  },
+  "author": "Jamelele",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "css-loader": "^3.5.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "svg-inline-loader": "^0.8.2",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
