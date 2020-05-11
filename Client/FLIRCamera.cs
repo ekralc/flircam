@@ -79,6 +79,19 @@ namespace flircam.Client
         }
 
         /// <summary>
+        /// Returns a forward vector of the camera in world space.
+        /// </summary>
+        public Vector3 ForwardVector
+        {
+            get
+            {
+                var rot = (float)Math.PI * camera.Rotation / 180.0f;
+                var num = (float)Math.Abs(Math.Cos(rot.X));
+                return new Vector3(-(float)Math.Sin(rot.Z) * num, (float)Math.Cos(rot.Z) * num, (float)Math.Sin(rot.X));
+            }
+        }
+
+        /// <summary>
         /// Gets the vehicle to which the camera is attached.
         /// </summary>
         public Vehicle Vehicle
@@ -127,21 +140,17 @@ namespace flircam.Client
         }
 
         /// <summary>
-        /// Calculates the target coordinates.
+        /// Returns the result of a raycast from the camera's position in the direction the camera's facing.
         /// </summary>
-        /// <remarks>This uses a raycast which is expensive.</remarks>
-        /// <returns>Coordinates of the location on the ground where the camera's pointing. Returns 0,0,0 if none found.</returns>
-        public Vector3 GetTargetCoordinates()
+        /// <remarks>Intersects with both the map and vehicles.</remarks>
+        /// <returns></returns>
+        public RaycastResult GetRaycastResult()
         {
-            var endCoords = new Vector3();
-            var pos = camera.Position;
-            var forward = camera.ForwardVector * 5000.0f;
-            // We use the flag '1' here to intersect with the map.
-            var handle = API.CastRayPointToPoint(pos.X, pos.Y, pos.Z, forward.X, forward.Y, forward.Z, 1, Vehicle.Handle, 0);
-            var result = new RaycastResult(handle);
-            Debug.WriteLine(result.HitPosition.ToString());
-            return endCoords;
- 
+            var start = Vehicle.Position;
+            var end = start + (ForwardVector * 10000.0f);
+            // We use the flag '3' here because we need the '1' and '2' flags to intersect with the map and vehicles.
+            var handle = API.CastRayPointToPoint(start.X, start.Y, start.Z, end.X, end.Y, end.Z, 3, Vehicle.Handle, 0);
+            return new RaycastResult(handle);
         }
 
         /// <summary>
