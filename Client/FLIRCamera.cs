@@ -1,4 +1,4 @@
-﻿using CitizenFX.Core;
+using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using System;
 using System.Threading.Tasks;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace flircam.Client
 {
     /// <summary>
-    /// Handles the creation and display of the camera to the player
+    /// Handles the creation and display of the camera to the player.
     /// </summary>
     public class FLIRCamera : IDisposable
     {
@@ -43,7 +43,7 @@ namespace flircam.Client
         }
 
         /// <summary>
-        /// Gets or sets the camera's field of view, minimum 1.0f and maximum 130.0f
+        /// Gets or sets the camera's field of view, minimum 1.0f and maximum 130.0f.
         /// </summary>
         public float FieldOfView
         {
@@ -70,6 +70,7 @@ namespace flircam.Client
         {
             get { return camera.Rotation; }
             set {
+                // Requires a hardcoded limit else the camera will glitch out beyond these
                 if (value.X < -89.5f) value.X = -89.5f;
                 if (value.X > 15.0f) value.X = 15.0f;
                 camera.Rotation = value; 
@@ -77,7 +78,7 @@ namespace flircam.Client
         }
 
         /// <summary>
-        /// Gets the vehicle to which the camera is attached
+        /// Gets the vehicle to which the camera is attached.
         /// </summary>
         public Vehicle Vehicle
         {
@@ -94,7 +95,7 @@ namespace flircam.Client
         }
 
         /// <summary>
-        /// Starts rendering the camera
+        /// Starts rendering the camera.
         /// </summary>
         private void Enable()
         {
@@ -120,14 +121,16 @@ namespace flircam.Client
         }
 
         /// <summary>
-        /// Returns the coordinates of the point on the ground where the camera's pointing
+        /// Calculates the target coordinates.
         /// </summary>
-        /// <returns></returns>
+        /// <remarks>This uses a raycast which is expensive.</remarks>
+        /// <returns>Coordinates of the location on the ground where the camera's pointing. Returns 0,0,0 if none found.</returns>
         public Vector3 GetTargetCoordinates()
         {
             var endCoords = new Vector3();
             var pos = camera.Position;
             var forward = camera.ForwardVector * 5000.0f;
+            // We use the flag '1' here to intersect with the map.
             var handle = API.CastRayPointToPoint(pos.X, pos.Y, pos.Z, forward.X, forward.Y, forward.Z, 1, Vehicle.Handle, 0);
             var result = new RaycastResult(handle);
             Debug.WriteLine(result.HitPosition.ToString());
@@ -138,7 +141,7 @@ namespace flircam.Client
         /// <summary>
         /// Sets up the display for a given camera mode
         /// </summary>
-        /// <param name="mode">The mode to switch to</param>
+        /// <param name="mode">The mode to switch to.</param>
         private void SwitchMode(CameraMode mode)
         {
             if (!Enabled) return;
@@ -161,7 +164,7 @@ namespace flircam.Client
 
         #region ticks
         /// <summary>
-        /// Various natives that need to be called whilst viewing the camera
+        /// Various natives that need to be called whilst viewing the camera.
         /// </summary>
         private async Task CameraTick()
         {
@@ -174,14 +177,13 @@ namespace flircam.Client
         /// <summary>
         /// Ensures smooth zooming
         /// </summary>
-        /// <returns></returns>
         private async Task ZoomTick()
         {
             // Smooth camera zooming
             while (camera.FieldOfView != FieldOfView)
             {
                 var difference = FieldOfView - camera.FieldOfView;
-                if (Math.Abs(difference) < 0.1f)
+                if (Math.Abs(difference) < 0.01f)
                 {
                     camera.FieldOfView = FieldOfView;
                     break;
