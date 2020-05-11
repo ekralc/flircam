@@ -4,3 +4,4 @@ dist/
 .vs/
 postbuild.cmd
 node_modules
+*.pdb

@@ -1,5 +1,6 @@
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -105,6 +106,11 @@ namespace flircam.Client
             API.SetTimecycleModifierStrength(0.1f);
             SwitchMode(Mode);
             ClientMain.Instance.AttachTickHandler(CameraTick);
+            API.SendNuiMessage(JsonConvert.SerializeObject(new
+            {
+                type = "ON_HUD_TOGGLE",
+                toggle = true,
+            }));
         }
 
         /// <summary>
