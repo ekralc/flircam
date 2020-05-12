@@ -146,7 +146,7 @@ namespace flircam.Client
         /// <returns></returns>
         public RaycastResult GetRaycastResult()
         {
-            var start = Vehicle.Position;
+            var start = camera.Position;
             var end = start + (ForwardVector * 10000.0f);
             // We use the flag '3' here because we need the '1' and '2' flags to intersect with the map and vehicles.
             var handle = API.CastRayPointToPoint(start.X, start.Y, start.Z, end.X, end.Y, end.Z, 3, Vehicle.Handle, 0);
