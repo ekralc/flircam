@@ -8,6 +8,7 @@ namespace flircam.Client
     {
         public static ClientMain Instance { get; private set; }
         public FLIRCamera FLIRCamera;
+        public Telemetry Telemetry;
         public ClientMain()
         {
             Instance = this;
@@ -47,6 +48,7 @@ namespace flircam.Client
             FLIRCamera.Enabled ^= true;
             AttachTickHandler(Controls);
             AttachTickHandler(RotationControls);
+            Telemetry = new Telemetry(FLIRCamera);
         }
 
         [Command("switchmode")]
