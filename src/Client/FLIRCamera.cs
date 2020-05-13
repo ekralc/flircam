@@ -116,7 +116,7 @@ namespace flircam.Client
             if (Enabled) return;
             World.RenderingCamera = camera;
             API.SetTimecycleModifier("heliGunCam");
-            API.SetTimecycleModifierStrength(0.1f);
+            API.SetTimecycleModifierStrength(0.9f);
             SwitchMode(Mode);
             ClientMain.Instance.AttachTickHandler(CameraTick);
             API.SendNuiMessage(JsonConvert.SerializeObject(new
@@ -165,7 +165,6 @@ namespace flircam.Client
             switch (mode)
             {
                 case CameraMode.Normal:
-                    Console.WriteLine("test");
                     break;
                 case CameraMode.Infrared:
                     API.SetSeethrough(true);

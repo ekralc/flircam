@@ -10,10 +10,10 @@
     </ItemGroup>
     <ItemGroup>
       <Reference Include="Newtonsoft.Json">
-        <HintPath>Newtonsoft.Json.dll</HintPath>
+        <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
       </Reference>
     </ItemGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="cd ..\&#xD;&#xA;postbuild.cmd" />
+      <Exec Command="cd ..\..\&#xD;&#xA;postbuild.cmd" />
     </Target>
 </Project>

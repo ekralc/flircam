@@ -55,12 +55,6 @@ namespace flircam.Client
             FLIRCamera.Mode = CameraMode.Night;
         }
 
-        [Command("target")]
-        public void Target()
-        {
-            FLIRCamera.GetTargetCoordinates();
-        }
-
         public async Task Controls()
         {
             Game.DisableControlThisFrame(0, Control.VehicleSelectNextWeapon);
