@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Crosshair />
+    <crosshair :visible="hudVisible" />
   </div>
 </template>
 
@@ -11,6 +11,11 @@ export default {
   name: 'App',
   components: {
     Crosshair,
+  },
+  data() {
+    return {
+      hudVisible: false,
+    };
   },
   mounted() {
     this.listener = (event) => {
@@ -24,8 +29,8 @@ export default {
   },
   methods: {
     ON_HUD_TOGGLE({ toggle }) {
-      console.log(`Received: ${toggle}`);
-    }
-  }
+      this.hudVisible = toggle;
+    },
+  },
 };
 </script>

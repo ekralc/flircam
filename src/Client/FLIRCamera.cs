@@ -1,4 +1,4 @@
-using CitizenFX.Core;
+﻿using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using Newtonsoft.Json;
 using System;
@@ -137,6 +137,11 @@ namespace flircam.Client
             API.SetNightvision(false);
             API.SetSeethrough(false);
             ClientMain.Instance.DetachTickHandler(CameraTick);
+            API.SendNuiMessage(JsonConvert.SerializeObject(new
+            {
+                type = "ON_HUD_TOGGLE",
+                toggle = false,
+            }));
         }
 
         /// <summary>

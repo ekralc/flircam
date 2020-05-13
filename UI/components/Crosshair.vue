@@ -10,10 +10,14 @@
 <script>
 export default {
   name: 'Crosshair',
+  props: {
+    visible: {
+      type: Boolean,
+    },
+  },
+
   data() {
-    return {
-      visible: true,
-    };
+    return { };
   },
 };
 </script>
