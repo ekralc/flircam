@@ -2,6 +2,8 @@
 
 This is a resource for FiveM that provides a realistic FLIR camera system to be used on helicopters.
 
+**This is an unfinished project, there's not much of use, but it might be useful to someone.**
+
 ## Planned Features
 
 - A fully rotatable and zoomable camera can be attached to any helicopter in any position.
@@ -12,13 +14,6 @@ This is a resource for FiveM that provides a realistic FLIR camera system to be 
 - The terrain and AI population are properly rendered at the location the camera is pointing, even when far away. This allows you to fly at much higher altitudes than other scripts would.
 - Images from the camera can be uploaded straight to a discord channel using webhooks (requires the screenshot-basic resource).
 - Only one person can control the camera at once, camera movement is synchronised between clients.
-
-## Installation
-
-*Note that this resource is written in C# and you will need the compiled code to run this, you can download the latest version from the releases page. Unless you're interested in contributing to the project, cloning the repository or downloading a ZIP of the source code won't be useful to you.*
-
-1. Download the latest release and copy it to your `resources` folder.
-2. Add `ensure flircam` to your server.cfg to ensure it runs on startup.
 
 ## License
 
